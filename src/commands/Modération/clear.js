@@ -11,13 +11,12 @@ module.exports = {
         .setMinValue(1)
         .setMaxValue(99)
         .setRequired(true)
-        )
+    )
     .addUserOption(option =>
         option.setName('user')
         .setDescription('Séléctioné un user a clear.')
         .setRequired(false)
-        ),
-
+    ),
     async execute(interaction) {
         const {channel, options} = interaction;
 

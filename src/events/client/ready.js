@@ -1,5 +1,6 @@
-const { mongoose, mongo } = require('mongoose');
-const LTClient = require('../../stuctures/client/LTClient');
+const { mongoose } = require('mongoose');
+const ownerSchema = require('../../utils/models/owner.model')
+const wlSchema = require('../../utils/models/whitelist.model')
 
 module.exports = {
     name: 'ready',
@@ -11,6 +12,31 @@ module.exports = {
         if (mongoose.connect) {
             console.log('La DB est connecté')
         }
-        console.log('Le bot est connecté')
+
+        const user =  await LTClient.users.fetch(LTClient.config.owner);
+
+        ownerSchema.findOne({ _id: LTClient.config.owner}, async (err, data) => {
+            if(!data) {
+                await ownerSchema.create({
+                    _id: LTClient.config.owner,
+                    reason: "Add automated by the bot",
+                    username: user.username,
+                    addby: LTClient.user.username,
+                })
+            }
+        })
+
+        wlSchema.findOne({ _id: LTClient.config.owner}, async (err, data) => {
+            if(!data) {
+                await wlSchema.create({
+                    _id: LTClient.config.owner,
+                    reason: "Add automated by the bot",
+                    username: user.username,
+                    wlby: LTClient.user.username,
+                })
+            }
+        })
+
+        console.log('Le bot est connecté');
     }
 }

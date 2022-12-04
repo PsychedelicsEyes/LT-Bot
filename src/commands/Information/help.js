@@ -15,7 +15,8 @@ const {
         information: "📚",
         modération: "🛠",
         owner: "👑",
-        public: "🌐"
+        public: "🌐",
+        whitelist: "✅",
       };
   
       const directories = [

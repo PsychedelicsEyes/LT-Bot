@@ -1,11 +1,10 @@
-const {SlashCommandBuilder, CommandInteraction, PermissionFlagsBits} = require('discord.js');
-const ownerSchema = require("../../utils/models/owner.model");
+const {SlashCommandBuilder} = require('discord.js');
 const wlSchema = require("../../utils/models/whitelist.model");
 
 module.exports = {
     data: new SlashCommandBuilder()
-    .setName('addowner')
-    .setDescription('Permet d\'ajouter un owner pour le bot')
+    .setName('wl')
+    .setDescription('Permet de whitelist un user')
     .addUserOption(options =>
         options.setName('user')
         .setDescription('Séléctioné un user a ajouté')
@@ -16,8 +15,8 @@ module.exports = {
         .setDescription('la raison de l\'ajout')
         .setRequired(true)
     ),
-    ownerOnly: true,
-    async execute(interaction) {
+    wlOnly: true,
+    async execute(interaction, client) {
         const {channel, options} = interaction;
         
         const user = options.getUser("user");
@@ -31,23 +30,11 @@ module.exports = {
                     reason: reason,
                     wlby: `Ajouter par ${interaction.user.id}(${interaction.user.username})`,
                 })
-            }
-        })
 
-        ownerSchema.findOne({ _id: user.id}, async (err, data) => {
-            if(!data) {
-                await ownerSchema.create({
-                    _id: user.id,
-                    username: user.username,
-                    reason: reason,
-                    addby: `Ajouter par ${interaction.user.id}(${interaction.user.username})`,
-                })
-
-                return interaction.reply({content: "Le membre a été ajouter en tant que owner ✅"})
+                return interaction.reply({content: "L'user est maintenant whitelist"})
             } else {
-                return interaction.reply({content: "Le membre est déjà owner"})
+                return interaction.reply({content: "L'user est déjà whitelist"})
             }
         })
-        
     }
 }
