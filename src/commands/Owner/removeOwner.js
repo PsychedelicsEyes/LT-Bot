@@ -18,7 +18,7 @@ module.exports = {
         const user = options.getUser("cible");
 
         if(user.id === client.config.owner) {
-            interaction.reply({ content: 'Vous pouvez pas faire cette sur action sur le vrai owner du bot.'})
+            interaction.reply({ content: 'Vous pouvez pas faire cette action sur le vrai owner du bot.'})
         } else {
             ownerSchema.findOne({ _id: user.id}, async (err, data) => {
                 if(data) {

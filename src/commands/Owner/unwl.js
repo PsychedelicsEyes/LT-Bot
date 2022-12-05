@@ -16,6 +16,10 @@ module.exports = {
         
         const user = options.getUser("user");
 
+        if(user.id === client.config.owner) {
+            return interaction.reply({content: "Vous pouvez pas unwhitelist l'owner du bot"})
+        } 
+        
         wlSchema.findOne({ _id: user.id}, async (err, data) => {
             if(data) {
                 await wlSchema.deleteOne()

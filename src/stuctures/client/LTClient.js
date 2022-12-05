@@ -21,12 +21,12 @@ class LTClient extends Client {
         this.refreshOwnered();
         setInterval(async() => {
             await this.refreshOwnered();
-        }, 2000);
+        }, 1000);
 
         this.refreshWitheListed();
         setInterval(async() => {
             await this.refreshWitheListed();
-        }, 2000);
+        }, 1000);
 
         this.login(this.config.token).then(() => {
             loadEvents(this);
