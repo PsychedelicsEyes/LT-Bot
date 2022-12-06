@@ -8,7 +8,7 @@ module.exports = {
     .setDescription('Permet de unblacklist un user')
     .addStringOption(options =>
         options.setName('user')
-        .setDescription('Séléctioné un user a supprimé')
+        .setDescription('Séléctioné un user a unblacklist')
         .setRequired(true)
     ),
     wlOnly: true,

@@ -14,9 +14,9 @@ module.exports = {
             const embed = new EmbedBuilder()
             .setTitle('Channel nuke avec succès ✅')
             .addFields(
-                {name: 'Auteur du nuke', value: interaction.user.username}
+                {name: 'Auteur du nuke', value: interaction.user.tag}
             )
-            ch.send({embeds: [embed]})
+            return ch.send({embeds: [embed]})
         })
     }
 }

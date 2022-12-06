@@ -21,7 +21,7 @@ module.exports = {
             if(!data) {
                 await blSchema.create({
                     word: word,
-                    blBy: `${interaction.user.id}(${interaction.user.username})`,
+                    blBy: `${interaction.user.id}(${interaction.user.tag})`,
                 })
                 const embed = new EmbedBuilder()
                 .setTitle('✅Le mot est maintenant blacklist')

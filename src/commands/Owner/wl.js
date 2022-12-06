@@ -1,5 +1,6 @@
 const {SlashCommandBuilder} = require('discord.js');
-const EmbedBuilder = require('../../stuctures/client/LTEmbed');
+
+
 const wlSchema = require("../../utils/models/whitelist.model");
 
 module.exports = {
@@ -27,9 +28,9 @@ module.exports = {
             if(!data) {
                 await wlSchema.create({
                     _id: user.id,
-                    username: user.username,
+                    tag: user.tag,
                     reason: reason,
-                    wlby: `Ajouter par ${interaction.user.id}(${interaction.user.username})`,
+                    wlby: `Ajouter par ${interaction.user.id}(${interaction.user.tag})`,
                 })
 
                 const embed = new EmbedBuilder()

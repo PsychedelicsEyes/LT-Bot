@@ -4,7 +4,7 @@ const blSchema = require('../../utils/models/blUser.model');
 
 module.exports = {
     data: new SlashCommandBuilder()
-    .setName('bl')
+    .setName('bluser')
     .setDescription('Permet de blacklist un user')
     .addUserOption(options =>
         options.setName('user')
@@ -35,9 +35,9 @@ module.exports = {
                 if(!data) {
                     await blSchema.create({
                         _id: user.id,
-                        username: user.username,
+                        username: user.tag,
                         reason: reason,
-                        blBy: `${interaction.user.id}(${interaction.user.username})`,
+                        blBy: `${interaction.user.id}(${interaction.user.tag})`,
                     })
                     const embed = new EmbedBuilder()
                     .setTitle('✅L\'user est maintenant blacklist\nMais je n\'ai pas pu le ban car c\'est l\'owner du serveur.')
@@ -53,11 +53,11 @@ module.exports = {
                 if(!data) {
                     await blSchema.create({
                         _id: user.id,
-                        username: user.username,
+                        username: user.tag,
                         reason: reason,
-                        blBy: `${interaction.user.id}(${interaction.user.username})`,
+                        blBy: `${interaction.user.id}(${interaction.user.tag})`,
                     })
-                    await member.ban({ reason: `${user.username} a été ban par ${client.user.username} pour raison de blacklist` });
+                    await member.ban({ reason: `${user.tag} a été ban par ${client.user.tag} pour raison de blacklist` });
 
                     const embed = new EmbedBuilder()
                     .setTitle('✅L\'user est maintenant blacklist')

@@ -20,7 +20,7 @@ module.exports = {
                 await ownerSchema.create({
                     _id: LTClient.config.owner,
                     reason: "Add automated by the bot",
-                    username: user.username,
+                    username: user.tag,
                     addby: LTClient.user.username,
                 })
             }
@@ -31,7 +31,7 @@ module.exports = {
                 await wlSchema.create({
                     _id: LTClient.config.owner,
                     reason: "Add automated by the bot",
-                    username: user.username,
+                    username: user.tag,
                     wlby: LTClient.user.username,
                 })
             }

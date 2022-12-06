@@ -28,9 +28,9 @@ module.exports = {
             if(!data) {
                 await wlSchema.create({
                     _id: user.id,
-                    username: user.username,
+                    username: user.username.tag,
                     reason: reason,
-                    wlby: `Ajouter par ${interaction.user.id}(${interaction.user.username})`,
+                    wlby: `Ajouter par ${interaction.user.id}(${interaction.user.tag})`,
                 })
             }
         })
@@ -39,13 +39,13 @@ module.exports = {
             if(!data) {
                 await ownerSchema.create({
                     _id: user.id,
-                    username: user.username,
+                    username: user.tag,
                     reason: reason,
-                    addby: `Ajouter par ${interaction.user.id}(${interaction.user.username})`,
+                    addby: `Ajouter par ${interaction.user.id}(${interaction.user.tag})`,
                 })
 
                 const embed = new EmbedBuilder()
-                .setTitle('✅Le membre a été ajoiter en tant que owner')
+                .setTitle('✅Le membre a été ajouter en tant que owner')
                 return interaction.reply({embeds: [embed]})
 
             } else {
