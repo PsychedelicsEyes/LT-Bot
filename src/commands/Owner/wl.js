@@ -1,4 +1,5 @@
 const {SlashCommandBuilder} = require('discord.js');
+const EmbedBuilder = require('../../stuctures/client/LTEmbed');
 const wlSchema = require("../../utils/models/whitelist.model");
 
 module.exports = {
@@ -31,9 +32,13 @@ module.exports = {
                     wlby: `Ajouter par ${interaction.user.id}(${interaction.user.username})`,
                 })
 
-                return interaction.reply({content: "L'user est maintenant whitelist"})
+                const embed = new EmbedBuilder()
+                .setTitle('✅L\'user est maintenant whitelist')
+                return interaction.reply({embeds:[embed]})
             } else {
-                return interaction.reply({content: "L'user est déjà whitelist"})
+                const embed = new EmbedBuilder()
+                .setTitle('❌L\'user est déjà whitelist')
+                return interaction.reply({embeds:[embed]})
             }
         })
     }

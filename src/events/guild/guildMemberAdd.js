@@ -1,13 +1,12 @@
 const { mongoose } = require('mongoose');
 const { EmbedBuilder } = require('discord.js')
-const blSchema = require('../../utils/models/blacklist.model')
+const blSchema = require('../../utils/models/blUser.model')
 
 module.exports = {
     name: 'guildMemberAdd',
     once: true,
     async execute(member, client) {
         blSchema.findOne({ _id: member.id}, async (err, data) => {
-
             if(data) {
                 const blEmbed = new EmbedBuilder()
                 .setTitle(`${client.user.username} systeme`)
@@ -19,7 +18,6 @@ module.exports = {
                 )
                 await member.send({embeds: [blEmbed]})
                 return member.guild.bans.create(member.id,{ reason:' ban pour bl'}).catch()
-
             }
         })
 

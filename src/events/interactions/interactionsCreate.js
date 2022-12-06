@@ -1,4 +1,5 @@
 const {commandInteraction} = require('discord.js');
+const EmbedBuilder = require('../../stuctures/client/LTEmbed')
 
 module.exports = {
     name: "interactionCreate",
@@ -12,11 +13,15 @@ module.exports = {
         }
 
         if(command.ownerOnly == true && !client.ownerUsers.includes(interaction.user.id)) {
-            return  interaction.reply({content: "Vous ne pouvez pas utiliser cette command"});
+            const embed = new EmbedBuilder()
+            .setTitle('Vous ne pouvez pas utiliser cette command')
+            return  interaction.reply({embeds: [embed]});
         }
 
-        if(command.wlOnly == true && !client.trustedUsers.includes(interaction.user.id)) {
-            return  interaction.reply({content: "Vous ne pouvez pas utiliser cette command"});
+        if(command.wlOnly == true && !client.wlUsers.includes(interaction.user.id)) {
+            const embed = new EmbedBuilder()
+            .setTitle('Vous ne pouvez pas utiliser cette command')
+            return  interaction.reply({embeds: [embed]});
         }
         
         command.execute(interaction, client);

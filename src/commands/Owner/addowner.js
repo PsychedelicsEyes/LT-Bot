@@ -1,4 +1,5 @@
 const {SlashCommandBuilder, CommandInteraction, PermissionFlagsBits} = require('discord.js');
+const EmbedBuilder = require('../../stuctures/client/LTEmbed')
 const ownerSchema = require("../../utils/models/owner.model");
 const wlSchema = require("../../utils/models/whitelist.model");
 
@@ -43,9 +44,14 @@ module.exports = {
                     addby: `Ajouter par ${interaction.user.id}(${interaction.user.username})`,
                 })
 
-                return interaction.reply({content: "Le membre a été ajouter en tant que owner ✅"})
+                const embed = new EmbedBuilder()
+                .setTitle('✅Le membre a été ajoiter en tant que owner')
+                return interaction.reply({embeds: [embed]})
+
             } else {
-                return interaction.reply({content: "Le membre est déjà owner"})
+                const embed = new EmbedBuilder()
+                .setTitle('❌Le membre est déjà owner')
+                return interaction.reply({embeds: [embed]})
             }
         })
         

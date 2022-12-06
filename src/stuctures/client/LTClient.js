@@ -1,12 +1,12 @@
 const { Client,GatewayIntentBits,Collection,Partials } = require('discord.js');
-const { Guilds,GuildMembers,GuildMessages } = GatewayIntentBits;
+const { Guilds,GuildMembers,GuildMessages,MessageContent } = GatewayIntentBits;
 const { User,Message,GuildMember,ThreadMember } = Partials;
 const ownerModel = require('../../utils/models/owner.model');
 const whiteListModel = require('../../utils/models/owner.model');
 
 class LTClient extends Client {
     constructor(options = {
-        intents: [Guilds,GuildMembers,GuildMessages],
+        intents: [Guilds,GuildMembers,GuildMessages,MessageContent],
         Partials: [User,Message,GuildMember,ThreadMember],
     })
     {
@@ -15,8 +15,9 @@ class LTClient extends Client {
         const {loadCommands} = require('../../utils/handlers/commandHandlers');
         this.config = require('../config/client');
         this.commands = new Collection();
-        this.trustedUsers = [];
+        this.wlUsers = [];
         this.ownerUsers = [];
+        this.blLinks = [];
 
         this.refreshOwnered();
         setInterval(async() => {
@@ -44,7 +45,7 @@ class LTClient extends Client {
     refreshWitheListed = async() => {
         const query = await whiteListModel.find({}).exec();
         const ids = query.map(user => user._id);
-        this.trustedUsers = ids;
+        this.wlUsers = ids;
     }
 }
 module.exports = LTClient;

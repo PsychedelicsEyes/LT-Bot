@@ -1,4 +1,5 @@
 const {SlashCommandBuilder, CommandInteraction, PermissionFlagsBits} = require('discord.js');
+const EmbedBuilder = require('../../stuctures/client/LTEmbed')
 const ownerSchema = require("../../utils/models/owner.model");
 const wlSchema = require("../../utils/models/whitelist.model");
 
@@ -23,10 +24,14 @@ module.exports = {
             ownerSchema.findOne({ _id: user.id}, async (err, data) => {
                 if(data) {
                     await ownerSchema.deleteOne()
-    
-                    return interaction.reply({content: "Le membre est désormais plus owner ✅"})
+                    
+                    const embed = new EmbedBuilder()
+                    .setTitle('✅Le membre est désormais plus owner')
+                    return interaction.reply({embeds:[embed]})
                 } else {
-                    return interaction.reply({content: "Le membre est pas owner"})
+                    const embed = new EmbedBuilder()
+                    .setTitle('❌Le membre est pas owner')
+                    return interaction.reply({embeds:[embed]})
                 }
             })
             wlSchema.findOne({ _id: user.id}, async (err, data) => {

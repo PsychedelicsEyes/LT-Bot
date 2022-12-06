@@ -1,4 +1,5 @@
-const {SlashCommandBuilder,CommandInteraction,PermissionFlagsBits,EmbedBuilder} = require('discord.js');
+const {SlashCommandBuilder,CommandInteraction,PermissionFlagsBits} = require('discord.js');
+const EmbedBuilder = require('../../stuctures/client/LTEmbed')
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -42,12 +43,12 @@ module.exports = {
             });
 
             await channel.bulkDelete(filtered).then(messages => {
-                res.setDescription(`${messages.size} messages supprimé de ${target}.`);
-                interaction.reply({embeds: [res]});
+                res.setDescription(`✅ ${messages.size} messages supprimé de ${target}.`);
+                interaction.reply({embeds: [embed]});
             });
         } else {
             await channel.bulkDelete(amount, true).then(messages => {
-                res.setDescription(`Succesfully deleted ${messages.size} messages supprimé du channel.`);
+                res.setDescription(`${messages.size} messages supprimé du channel.`);
                 interaction.reply({embeds: [res]});
             });
         }

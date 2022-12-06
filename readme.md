@@ -12,13 +12,21 @@
 * [**Mongoose**](https://www.npmjs.com/package/mongoose)
 
 ## 🛠Comment configuré le bot?
-### Un fichier a besoins d'être remplie
+### Deux fichiers a besoins d'être remplie
 ```js
 ./src/structures/config/client.js
 module.exports = {
-    token:"Le token du bot",
-    mongoURL:"url de mongoDB",
-    owner:"Votre id de compte",
+    token:"Le token du bot",//obligé
+    mongoURL:"url de mongoDB",//obligé
+    owner:"Votre id de compte",//obligé
+}
+
+./src/structures/config/embed.js
+module.exports = {
+    'color': 'html couleur',//obligé
+    'footer': 'message du footer',//obligé
+    thumbnailActive: false,// true ou false et le est obligé
+    'thumbnail': 'lien' // si thumbnailActive  est true
 }
 ```
 ## Comment lancer le bot?

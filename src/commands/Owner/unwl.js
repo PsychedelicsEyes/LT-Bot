@@ -1,4 +1,5 @@
 const {SlashCommandBuilder} = require('discord.js');
+const EmbedBuilder = require('../../stuctures/client/LTEmbed');
 const wlSchema = require("../../utils/models/whitelist.model");
 
 module.exports = {
@@ -17,16 +18,21 @@ module.exports = {
         const user = options.getUser("user");
 
         if(user.id === client.config.owner) {
-            return interaction.reply({content: "Vous pouvez pas unwhitelist l'owner du bot"})
+            const embed = new EmbedBuilder()
+            .setTitle('❌Vous pouvez pas unwhitelist l\'owner du bot')
+            return interaction.reply({embeds:[embed]})
         } 
         
         wlSchema.findOne({ _id: user.id}, async (err, data) => {
             if(data) {
                 await wlSchema.deleteOne()
-
-                return interaction.reply({content: "L'user est maintenant unwhitelist"})
+                const embed = new EmbedBuilder()
+                .setTitle('✅L\'user est maintenant unwhitelist')
+                return interaction.reply({embeds:[embed]})
             } else {
-                return interaction.reply({content: "L'user est pas withelist"})
+                const embed = new EmbedBuilder()
+                .setTitle('❌L\'user est pas withelist')
+                return interaction.reply({embeds:[embed]})
             }
         })
     }
