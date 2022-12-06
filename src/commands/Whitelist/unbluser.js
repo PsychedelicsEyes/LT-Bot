@@ -17,7 +17,7 @@ module.exports = {
         
         const user = options.getString("user");
 
-        blSchema.findOne({ _id: user.id}, async (err, data) => {
+        blSchema.findOne({ _id: user}, async (err, data) => {
             if(data) {
                 await blSchema.deleteOne()
                 const embed = new EmbedBuilder()

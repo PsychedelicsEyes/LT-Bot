@@ -12,7 +12,7 @@ module.exports = {
             if(data && !client.wlUsers.includes(message.author.id)) {
                 message.delete();
                 const embed = new EmbedBuilder()
-                .setTitle(`les liens d\'invitations sont interdits`)
+                .setTitle(`les liens d\'invitations ou les motes blacklist sont interdits `)
                 return message.channel.send({embeds:[embed]})
             } 
         })

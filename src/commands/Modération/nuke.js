@@ -8,11 +8,10 @@ module.exports = {
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels),
     async execute(interaction, client) {
         interaction.channel.clone().then((ch) => {
-            ch.setParent(interaction.channel.parent.id);
             ch.setPosition(interaction.channel.position)
             interaction.channel.delete();
 
-            const embed = new EmbedBuidler()
+            const embed = new EmbedBuilder()
             .setTitle('Channel nuke avec succès ✅')
             .addFields(
                 {name: 'Auteur du nuke', value: interaction.user.username}
